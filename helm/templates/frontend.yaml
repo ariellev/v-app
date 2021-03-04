@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: narelav.jfrog.io/prod/frontend
+        image: narelav.jfrog.io/prod/frontend:{{ .Values.image.tag }}
         ports:
         - containerPort: 3000
       imagePullSecrets:
