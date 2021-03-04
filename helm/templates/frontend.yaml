@@ -19,8 +19,8 @@ spec:
         image: narelav.jfrog.io/prod/frontend
         ports:
         - containerPort: 3000
-    imagePullSecrets:
-      - name: jfrog
+      imagePullSecrets:
+        - name: jfrog
 ---
 apiVersion: v1
 kind: Service
