@@ -1,4 +1,6 @@
 image:
   tag: latest
 ingress:
-  host: frontend.192.168.64.7.xip.io
+  host: 192.168.64.7.xip.io
+service:
+  name: frontend

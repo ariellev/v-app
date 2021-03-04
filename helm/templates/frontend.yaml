@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: frontend
+  name: {{ template "fullname" . }}
   labels:
-    app: frontend
+    app: {{ template "fullname" . }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: frontend
+      app: {{ template "fullname" . }}
   template:
     metadata:
       labels:
-        app: frontend
+        app: {{ template "fullname" . }}
     spec:
       containers:
       - name: hello
@@ -23,10 +23,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: frontend
+  name: {{ template "fullname" . }}
 spec:
   selector:
-    app: frontend
+    app: {{ template "fullname" . }}
   ports:
     - protocol: TCP
       port: 80
@@ -35,18 +35,18 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: frontend
+  name: {{ template "fullname" . }}
   annotations:
     ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-  - host: {{ .Values.ingress.host }}
+  - host: {{ template "fullname" . }}.{{ .Values.ingress.host }}
     http:
       paths:
         - path: /
           pathType: Prefix
           backend:
             service:
-              name: frontend
+              name: {{ .Values.service.name }}
               port:
                 number: 80
